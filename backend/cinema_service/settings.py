@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from datetime import timedelta
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -46,7 +49,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "drf_spectacular",
     "debug_toolbar",
-    "corsheaders"
+    "corsheaders",
     "cinema",
     "user",
 ]
@@ -90,10 +93,11 @@ WSGI_APPLICATION = "cinema_service.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "HOST": os.environ["POSTGRES_HOST"],
-        "NAME": os.environ["POSTGRES_DB"],
-        "USER": os.environ["POSTGRES_USER"],
-        "PASSWORD": os.environ["POSTGRES_PASSWORD"],
+        "HOST": os.getenv("POSTGRES_HOST"),
+        "PORT": os.getenv("POSTGRES_PORT"),
+        "NAME": os.getenv("POSTGRES_DB"),
+        "USER": os.getenv("POSTGRES_USER"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
     }
 }
 
